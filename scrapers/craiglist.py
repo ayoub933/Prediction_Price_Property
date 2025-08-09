@@ -3,11 +3,31 @@ from database.models import save_property
 from data_processing.price_extractor import extract_price
 
 class CraigslistParisScraper(BaseScraper):
-    def __init__(self):
+    cities = [
+        "london.craigslist.org",
+        "berlin.craigslist.org",
+        "madrid.craigslist.org",
+        "milano.craigslist.org",
+        "amsterdam.craigslist.org",
+        "newyork.craigslist.org",
+        "losangeles.craigslist.org",
+        "chicago.craigslist.org",
+        "miami.craigslist.org",
+        "toronto.craigslist.org",
+        "tokyo.craigslist.org",
+        "hongkong.craigslist.org",
+        "manila.craigslist.org",
+        "bangkok.craigslist.org",
+        "delhi.craigslist.org"
+    ]
+
+    def __init__(self, city_index=0):
+        city_host = self.cities[city_index]
         super().__init__(
-            name="craigslist_paris",
-            url="https://paris.craigslist.org"
+            name=f"craigslist_{city_host.split('.')[0]}",
+            url=f"https://{city_host}"
         )
+
     
     # On construit l'URL de recherche pour craigslist (ex : https://paris.craigslist.org/search/apa?isTrusted=true&is_furnished=1&max_price=2000&min_price=500#search=2~gallery~0)
     def build_search_url(self, search_term="", min_price=None, max_price=None):
