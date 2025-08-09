@@ -1,5 +1,6 @@
 from scrapers.base import BaseScraper
 from database.models import save_property
+from data_processing.price_extractor import extract_price
 
 class CraigslistParisScraper(BaseScraper):
     def __init__(self):
@@ -59,6 +60,8 @@ class CraigslistParisScraper(BaseScraper):
                 return []
 
             properties = self.extract_property_data(soup)
+            for prop in properties:
+                prop["prix"] = extract_price(prop["prix"]) # €1 100 ----> 1100
             
             saved_count = 0
             for prop in properties:
