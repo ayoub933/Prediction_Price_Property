@@ -2,7 +2,7 @@ import psycopg2
 from psycopg2 import sql
 import os
 from pathlib import Path
-from connection import get_connection
+from database.connection import get_connection
 
 # Fonction permettant de créer la base de donnée PostgreSQL via le fichier migrations.sql
 def run_migrations():
