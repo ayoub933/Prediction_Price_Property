@@ -97,7 +97,7 @@ class CraigslistParisScraper(BaseScraper):
                         longitude=None,
                         description=None,
                         features=[],
-                        source="craigslist_paris",
+                        source=self.name,
                         url=prop["url"],
                         scraped_at="2025-08-09"
                     )
