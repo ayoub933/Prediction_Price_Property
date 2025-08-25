@@ -3,3 +3,8 @@ pydeck
 pandas
 numpy
 psycopg2-binary
+scikit-learn
+plotly
+beautifulsoup4
+requests
+SQLAlchemy

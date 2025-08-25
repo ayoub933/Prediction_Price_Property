@@ -26,8 +26,7 @@ df2 = load_properties_with_predictions()
 
 selected_types, min_price, max_price, rooms_range, surface_range = sidebar_filters(df)
 
-st.title("🏠 Tableau de bord — ébauche modulaire")
-st.caption("Mini app Streamlit, utils séparés.")
+st.title("Prédiction immobilière et données")
 f = apply_filters(
     df,
     selected_types=selected_types,

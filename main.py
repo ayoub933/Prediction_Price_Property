@@ -2,11 +2,7 @@ from scrapers.c21 import C21Scraper
 
 if __name__ == "__main__":
     scraper = C21Scraper()
-
-    # Mets les valeurs que tu veux
     result = scraper.scrape_c21(limit=300000, workers=24)
-
-    # Compatible int OU liste
     if isinstance(result, int):
         print(f"\nAnnonces sauvegardées : {result}\n")
     else:
