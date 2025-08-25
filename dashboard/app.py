@@ -1,4 +1,12 @@
-import streamlit as st
+import os, streamlit as st
+if "postgres" in st.secrets:
+    pg = st.secrets["postgres"]
+    os.environ["PGHOST"] = pg["host"]
+    os.environ["PGPORT"] = str(pg.get("port", 5432))
+    os.environ["PGDATABASE"] = pg["dbname"]
+    os.environ["PGUSER"] = pg["user"]
+    os.environ["PGPASSWORD"] = pg["password"]
+    os.environ["PGSSLMODE"] = pg.get("sslmode", "require")
 from utils import (
     load_properties,
     load_properties_with_predictions,
@@ -18,6 +26,7 @@ from utils import (
     plot_residuals_by_type,
     plot_confidence_vs_error,
 )
+
 
 st.set_page_config(page_title="Immo — Starter", layout="wide")
 

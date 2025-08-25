@@ -1,3 +1,6 @@
+CREATE SCHEMA IF NOT EXISTS public;
+SET search_path TO public;
+
 CREATE TABLE IF NOT EXISTS properties (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255) NOT NULL,

@@ -9,29 +9,42 @@ import streamlit as st
 # --- DATA ---
 @st.cache_data()
 def load_properties():
-    with get_connection() as conn:
-        q = """
+    connexion = get_connection()
+    q = """
         SELECT id, title, address, price::float AS price, rooms, property_type, latitude, longitude,
                listing_type, scraped_at, url, surface::float AS surface
-        FROM properties
+        FROM public.properties
         """
-        return pd.read_sql(q, conn)
+    try:
+        df = pd.read_sql(q, connexion)
+        return df
+    finally:
+        try:
+            connexion.close()
+        except Exception:
+            pass
 
 # Renvoie un dataframe réunissant les données scrappés et les prédictions de l'algo avec l'autre table
 def load_properties_with_predictions():
-    with get_connection() as conn:
-        q = """
-        SELECT p.id, p.title, p.address, p.price::float AS price, p.rooms, p.property_type, p.latitude, p.longitude,
-               p.listing_type, p.scraped_at, p.url, p.surface::float AS surface,
-            pr.predicted_price::float,
-            pr.confidence_score::float,
-            pr.created_at AS prediction_date
-        FROM properties p
-        JOIN price_predictions pr
-            ON p.id = pr.property_id;
-        """
-        df = pd.read_sql(q, conn)
-    return df
+    connexion = get_connection()
+    q = """
+    SELECT p.id, p.title, p.address, p.price::float AS price, p.rooms, p.property_type, p.latitude, p.longitude,
+            p.listing_type, p.scraped_at, p.url, p.surface::float AS surface,
+        pr.predicted_price::float,
+        pr.confidence_score::float,
+        pr.created_at AS prediction_date
+    FROM public.properties p
+    JOIN public.price_predictions pr
+        ON p.id = pr.property_id;
+    """
+    try:
+        df = pd.read_sql(q, connexion)
+        return df
+    finally:
+        try:
+            connexion.close()
+        except Exception:
+            pass
 
 # On filtre par type, prix, chambres et surface (si dispo)
 def apply_filters(df, selected_types, min_price, max_price, rooms_range=None, surface_range=None):

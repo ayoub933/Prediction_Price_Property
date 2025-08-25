@@ -58,7 +58,7 @@ def get_all_properties():
             return
         
         cursor = connexion.cursor()
-        requête = "SELECT * FROM properties"
+        requête = "SELECT * FROM public.properties"
         cursor.execute(requête)
         fetch = cursor.fetchall()  
         print(f"Voici les données contenu dans la table : \n {fetch}")

@@ -9,7 +9,7 @@ def load_data(listing_type):
     SELECT
     id, title, address, price::float, surface,
     rooms, property_type, latitude, longitude, scraped_at, source
-    FROM properties
+    FROM public.properties
     WHERE price IS NOT NULL AND listing_type = %s
     """
     df = pd.read_sql(q, connexion, params=[listing_type])
