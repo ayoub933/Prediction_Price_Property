@@ -19,4 +19,4 @@ Voici les technos utilisés lors de l'élaboration de ce projet :
 - **Vous pouvez ensuite lancer cette commande : 'psql -h localhost -d real_estate_db -U <user>' et rentrer votre mot de passe pour accéder à la db créer**
 - **Pour lancer le projet, aller à la base du projet .../Prediction_Price_Property  et lancer 'python3 -u main.py' ou votre version de python**
 - **Pour lancer le modèle ML (à la base du projet): 'python3 -m ml_models.model_train'**
-- **Pour accéder aux dashboard interactif, lancer cette commande à la base du projet: 'streamlit run dashboard/app.py'**
+- **Pour accéder aux dashboard interactif, lancer cette commande à la base du projet: 'streamlit run dashboard/app.py' et ouvrir le lien donné dans le terminale**
