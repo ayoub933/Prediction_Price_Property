@@ -9,42 +9,42 @@ import streamlit as st
 # --- DATA ---
 @st.cache_data()
 def load_properties():
-    connexion = get_connection()
+    conn = get_connection()
+    if conn is None:
+        st.error("Connexion PostgreSQL impossible.")
+        st.stop()
     q = """
         SELECT id, title, address, price::float AS price, rooms, property_type, latitude, longitude,
                listing_type, scraped_at, url, surface::float AS surface
         FROM public.properties
-        """
+    """
     try:
-        df = pd.read_sql(q, connexion)
-        return df
+        return pd.read_sql(q, conn)
     finally:
-        try:
-            connexion.close()
-        except Exception:
-            pass
+        try: conn.close()
+        except: pass
 
 # Renvoie un dataframe réunissant les données scrappés et les prédictions de l'algo avec l'autre table
 def load_properties_with_predictions():
-    connexion = get_connection()
+    conn = get_connection()
+    if conn is None:
+        st.error("Connexion PostgreSQL impossible.")
+        st.stop()
     q = """
-    SELECT p.id, p.title, p.address, p.price::float AS price, p.rooms, p.property_type, p.latitude, p.longitude,
-            p.listing_type, p.scraped_at, p.url, p.surface::float AS surface,
-        pr.predicted_price::float,
-        pr.confidence_score::float,
-        pr.created_at AS prediction_date
-    FROM public.properties p
-    JOIN public.price_predictions pr
-        ON p.id = pr.property_id;
+        SELECT p.id, p.title, p.address, p.price::float AS price, p.rooms, p.property_type, p.latitude, p.longitude,
+               p.listing_type, p.scraped_at, p.url, p.surface::float AS surface,
+               pr.predicted_price::float,
+               pr.confidence_score::float,
+               pr.created_at AS prediction_date
+        FROM public.properties p
+        JOIN public.price_predictions pr
+          ON p.id = pr.property_id
     """
     try:
-        df = pd.read_sql(q, connexion)
-        return df
+        return pd.read_sql(q, conn)
     finally:
-        try:
-            connexion.close()
-        except Exception:
-            pass
+        try: conn.close()
+        except: pass
 
 # On filtre par type, prix, chambres et surface (si dispo)
 def apply_filters(df, selected_types, min_price, max_price, rooms_range=None, surface_range=None):
