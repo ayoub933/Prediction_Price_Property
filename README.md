@@ -4,15 +4,15 @@ Les résultats sont ensuite intégrés dans un dashboard Streamlit, permettant d
 C'est un projet que j'ai fais pour apprendre le scrapping, apprendre à utiliser un modèle ML avec des données réelles et apprendre Streamlit.
 
 Voici les technos utilisés lors de l'élaboration de ce projet :
-Python : traitement des données, ML, API
--PostgreSQL
--BeautifulSoup / Requests : scraping des annonces depuis C21
--Pandas/NumPy
--scikit-learn : Random Forest Regressor pour la prédiction
--Streamlit : dashboard interactif
--Plotly : visualisations avancées (carte, heatmaps, distributions)
+- **Python** : traitement des données, Machine Learning, API
+- **PostgreSQL** : base de données relationnelle
+- **BeautifulSoup / Requests** : scraping des annonces depuis C21
+- **Pandas / NumPy** : manipulation et analyse des données
+- **scikit-learn** : Random Forest Regressor pour la prédiction
+- **Streamlit** : dashboard interactif
+- **Plotly** : visualisations avancées (carte, heatmaps, distributions)
 
-                                            ------------------LANCER LE PROJET------------------
+------------------LANCER LE PROJET------------------
 Vérifier si vous avez installer toutes les dépendances du projet, lancer 'pip install -r requirements.txt' à la base du projet.
 
 -- Il faut d'abord créer la base de donnée, changer votre user et password dans le fichier connection.py et lancer le fichier database/models.py
