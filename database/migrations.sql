@@ -10,8 +10,9 @@ CREATE TABLE IF NOT EXISTS properties (
     longitude DECIMAL(11,8),
     description TEXT,
     features TEXT[], -- [parking, balcon, cave]
-    source VARCHAR(50), -- leboncoin, seloger, pap
+    source VARCHAR(50), -- c21 surtout
     url TEXT,
+    listing_type VARCHAR(10), -- louable ou achetable
     scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -24,16 +25,8 @@ CREATE TABLE IF NOT EXISTS price_predictions (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Table des tendances marché
-CREATE TABLE IF NOT EXISTS market_trends (
-    id SERIAL PRIMARY KEY,
-    area VARCHAR(100),
-    avg_price_sqm DECIMAL(10,2),
-    evolution_percentage DECIMAL(5,2),
-    last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
 -- Index pour optimiser les recherches
 CREATE INDEX IF NOT EXISTS idx_properties_price ON properties(price);
 CREATE INDEX IF NOT EXISTS idx_properties_area ON properties(address);
 CREATE INDEX IF NOT EXISTS idx_properties_scraped ON properties(scraped_at);
+CREATE UNIQUE INDEX IF NOT EXISTS ux_properties_source_url ON properties(source, url);

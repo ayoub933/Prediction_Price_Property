@@ -29,7 +29,7 @@ def run_migrations():
         print(f"Erreur lors de l'exécution des migrations : {e}")
 
 # Fonction permettant de sauvegarder les données passée en paramètre dans la table adaptée (properties)
-def save_property(title, price, address, surface, rooms, property_type, latitude, longitude, description, features, source, url, scraped_at):
+def save_property(title, price, address, surface, rooms, property_type, latitude, longitude, description, features, source, url, listing_type, scraped_at):
     try:
         connexion = get_connection()
         if connexion is None:
@@ -39,10 +39,10 @@ def save_property(title, price, address, surface, rooms, property_type, latitude
         cursor = connexion.cursor()
         requête = """
              INSERT INTO properties
-             (title, price, address, surface, rooms, property_type, latitude, longitude, description, features, source, url, scraped_at) 
-             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+             (title, price, address, surface, rooms, property_type, latitude, longitude, description, features, source, url, listing_type, scraped_at) 
+             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
              """
-        cursor.execute(requête, (title, price, address, surface, rooms, property_type, latitude, longitude, description, features, source, url, scraped_at))
+        cursor.execute(requête, (title, price, address, surface, rooms, property_type, latitude, longitude, description, features, source, url, listing_type, scraped_at))
         connexion.commit()
         cursor.close()
         connexion.close()
