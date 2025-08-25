@@ -20,3 +20,5 @@ Voici les technos utilisés lors de l'élaboration de ce projet :
 - **Pour lancer le projet, aller à la base du projet .../Prediction_Price_Property  et lancer 'python3 -u main.py' ou votre version de python**
 - **Pour lancer le modèle ML (à la base du projet): 'python3 -m ml_models.model_train'**
 - **Pour accéder aux dashboard interactif, lancer cette commande à la base du projet: 'streamlit run dashboard/app.py' et ouvrir le lien donné dans le terminale**
+
+### Voici le lien pour accéder au dashboard interactif directement, sans lancer le projet : https://ayoub933-prediction-price-property-dashboardapp-teybje.streamlit.app/
